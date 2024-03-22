@@ -1,0 +1,124 @@
+body{
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+.main-cadastro{
+    width: 100vw;
+    height: 100vh;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-cadastro,
+.right-cadastro{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left-cadastro-image {
+    font-size: 3vw;
+    width: 70%;
+    max-width: 400px;
+}
+
+.left-cadastro > h1 {
+    color: #030303;
+}
+
+.card-cadastro {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 35px;
+    background: #efeff1;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.card-cadastro > h2 {
+    color: #070707;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+}
+
+.textfield {
+    margin: 10px 0;
+}
+
+.textfield > input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: #e2e0e6;
+    color: #9fa0a0de;
+    font-size: 12pt;
+    outline: none;
+}
+
+.textfield > label {
+    color: #1a1919de;
+    margin-bottom: 5px;
+}
+
+.textfield > input::placeholder {
+    color: #4c505094;
+}
+
+.btn-cadastro {
+    width: 100%;
+    padding: 16px 0px;
+    margin: 25px 0;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #2b134b;
+    background: #00ff88;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #00ff8052;
+}
+
+@media only screen and (max-width: 950px) {
+    .left-cadastro,
+    .right-cadastro {
+        width: 60%;
+    }
+
+    .left-cadastro-image {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .main-cadastro {
+        flex-direction: column;
+    }
+
+    .left-cadastro,
+    .right-cadastro {
+        width: 100%;
+        height: auto;
+    }
+
+    .left-cadastro-image {
+        width: 60%;
+    }
+
+    .card-cadastro {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
