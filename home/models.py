@@ -1,3 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+class Publicacao(models.Model):
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    conteudo = models.TextField()
+    data_publicacao = models.DateTimeField(auto_now_add=True)
+    curtidas = models.ManyToManyField(User, related_name='curtidas', blank=True)
+    
+    def total_curtidas(self):
+        return self.curtidas.count()
+    
+    def __str__(self):
+        return f'{self.autor.username} - {self.data_publicacao}'
+    
+class Comentario(models.Model):
+    publicacao = models.ForeignKey(Publicacao, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    texto = models.TextField()
+    data_comentario = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'Comentario de {self.usuario.username} em {self.publicacao.data_publicacao}'
