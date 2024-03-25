@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'cabecalho' %}
+    <link rel="stylesheet" href="{% static 'usuarios/css/login.css' %}">
+{% endblock %}
+
+{% block 'conteudo' %}
+
+    <header>
+        <div class="container">
+            <h1>LinkUp</h1>
+            <nav>
+                <a href="/usuarios/cadastro">Cadastre-se</a>
+                <a href="http://127.0.0.1:8000/">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Faça login <br>e entre para nosso time</h1>
+            <img src="{% static 'usuarios/img/inicial.svg' %}" class="left-login-image" alt="animação imagem">
+        </div>
+        <div class="rigth-login">
+            <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+                <div class="card-login">
+                    <h1>LOGIN</h1>
+                    <div class="textfield">
+                        <label for="usuario">Username</label>
+                        <input type="text" class="input-form" name="username" placeholder="Username">
+                    </div>
+                    <div class="textfield">
+                        <label for="senha">Senha</label>
+                        <input type="password" class="input-form" name="senha" placeholder="Senha">
+                    </div>
+                    <button class="btn-login" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

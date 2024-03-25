@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-
 body {
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
@@ -9,7 +8,7 @@ body * {
     box-sizing: border-box;
 }
 
-.container{
+.container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
@@ -42,7 +41,7 @@ nav a:first-child {
     margin-left: 0;
 }
 
-.main-cadastro {
+.main-login{
     width: 100vw;
     height: 100vh;
     background: #f9f9f9;
@@ -51,9 +50,8 @@ nav a:first-child {
     align-items: center;
 }
 
-.left-cadastro,
-.right-cadastro {
-    width: 50%;
+.left-login{
+    width: 50vw;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -61,36 +59,51 @@ nav a:first-child {
     flex-direction: column;
 }
 
-.left-cadastro-image {
+.left-login-image{
     font-size: 3vw;
-    width: 70%;
-    max-width: 400px;
+    width: 35vw;
 }
 
-.left-cadastro > h1 {
-    color: #111111;
+.left-login > h1{
+    color: black;
 }
 
-.card-cadastro {
+.right-login{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login{
     width: 100%;
-    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     padding: 30px 35px;
     background: #f3f2f5;
     border-radius: 20px;
     box-shadow: 0px 10px 40px #00000056;
 }
 
-.card-cadastro > h2 {
-    color: #0e0f0f;
+.card-login > h1{
+    color: black;
     font-weight: 800;
-    margin: 0 0 20px 0;
+    margin: 0;
 }
 
-.textfield {
-    margin: 10px 0;
+.textfield{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px;
 }
 
-.textfield > input {
+.textfield > input{
     width: 100%;
     border: none;
     border-radius: 10px;
@@ -98,22 +111,24 @@ nav a:first-child {
     background: #bec0c4fb;
     color: #000000de;
     font-size: 12pt;
+    box-shadow: 0px 10px 40px #00000056;
     outline: none;
+    box-sizing: border-box;
 }
 
-.textfield > label {
+.textfield > label{
     color: #070707de;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.textfield > input::placeholder {
+.textfield > input::placeholder{
     color: #20222294;
 }
 
-.btn-cadastro {
+.btn-login{
     width: 100%;
     padding: 16px 0px;
-    margin: 25px 0;
+    margin: 25px;
     border: none;
     border-radius: 8px;
     outline: none;
@@ -126,34 +141,35 @@ nav a:first-child {
     box-shadow: 0px 10px 40px -12px #00ff8052;
 }
 
-@media only screen and (max-width: 950px) {
-    .left-cadastro,
-    .right-cadastro {
-        width: 60%;
-    }
-
-    .left-cadastro-image {
-        width: 80%;
+@media only screen and (max-width: 950px){
+    .card-login{
+        width: 85%;
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .main-cadastro {
+@media only screen and (max-width: 600px){
+    .main-login{
         flex-direction: column;
     }
+    .left-login > h1{
+        display: none;
+    }
 
-    .left-cadastro,
-    .right-cadastro {
+    .left-login{
         width: 100%;
         height: auto;
     }
 
-    .left-cadastro-image {
-        width: 60%;
+    .right-login{
+        width: 100%;
+        height: auto;
     }
 
-    .card-cadastro {
+    .left-login-image{
+        width: 50vw;
+    }
+
+    .card-login{
         width: 90%;
-        margin-bottom: 20px;
     }
 }

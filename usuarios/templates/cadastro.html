@@ -6,36 +6,48 @@
 {% endblock %}
 
 {% block 'conteudo' %}
-<div class="main-cadastro">
-    <div class="left-cadastro">
-        <h1>Crie uma conta<br>e junte-se a nós</h1>
-        <img src="{% static 'usuarios/img/inicial.svg' %}" class="left-cadastro-image" alt="animação imagem">
+
+
+    <header>
+        <div class="container">
+            <h1>LinkUp</h1>
+            <nav>
+                <a href="/usuarios/logar">Login</a>
+                <a href="http://127.0.0.1:8000/">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-cadastro">
+        <div class="left-cadastro">
+            <h1>Crie uma conta<br>e junte-se a nós</h1>
+            <img src="{% static 'usuarios/img/inicial.svg' %}" class="left-cadastro-image" alt="animação imagem">
+        </div>
+        <div class="right-cadastro">
+            <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+                <div class="card-cadastro">
+                    <h1>CADASTRO</h1>
+                    <div class="textfield">
+                        <label for="nome">Username</label>
+                        <input type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="textfield">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="textfield">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha" placeholder="Senha">
+                    </div>
+                    <div class="textfield">
+                        <label for="confirmar-senha">Confirmar Senha</label>
+                        <input type="password" name="confirmar_senha" placeholder="Confirmar Senha">
+                    </div>
+                    <button class="btn-cadastro" type="submit">Cadastrar</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="right-cadastro">
-        <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
-            <div class="card-cadastro">
-                <h1>CADASTRO</h1>
-                <div class="textfield">
-                    <label for="nome">Username</label>
-                    <input type="text" name="username" placeholder="Username">
-                </div>
-                <div class="textfield">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" placeholder="Email">
-                </div>
-                <div class="textfield">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" placeholder="Senha">
-                </div>
-                <div class="textfield">
-                    <label for="confirmar-senha">Confirmar Senha</label>
-                    <input type="password" name="confirmar_senha" placeholder="Confirmar Senha">
-                </div>
-                <button class="btn-cadastro" type="submit">Cadastrar</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 
 {% endblock 'conteudo' %}
