@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'cabecalho' %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block 'conteudo' %}
+
+<header>
+    <img src="{% static 'home/img/logo.svg' %}" alt="Logo rede social">
+</header>
+
+<main class="main">
+    <!--FORMULÁRIO DE ENVIO-->
+    <div class="newPost">
+        <div class="infoUser">
+            <div class="imgUser"></div>
+            <strong>{{request.user}}</strong>
+        </div>
+        <form id="post-form" method="POST" action="{% url 'publicacao' %}" class="formPost">{% csrf_token %}
+            <textarea id="post-text" name="post-text" placeholder="O que você está pensando?"></textarea>
+
+            <div class="iconsAndButton">
+                <div class="icons">
+                    <button class="btnFileForm"><img src="{% static 'home/img/img.svg' %}" alt="Adicionar uma imagem"></button>
+                    <button class="btnFileForm"><img src="{% static 'home/img/gif.svg' %}" alt="Adicionar um gif"></button>
+                    <button class="btnFileForm"><img src="{% static 'home/img/video.svg' %}" alt="Adicionar um video"></button>
+                </div>
+                <button type="submit" id="post-button" class="btnSubmitForm">Publicar</button>
+            </div>
+        </form>
+    </div>
+    <!--FINAL DO FORMULÁRIO DE ENVIO-->
+
+    <!--AQUI SERÃO LISTADAS AS PUBLICAÇÕES-->
+
+    <ul class="posts">
+        {% for publicacao in publicacoes %}
+        <li class="post">
+            <div class="infoUserPost">
+                <div class="imgUserPost"></div>
+
+                <div class="nameAndHour">
+                    <strong>{{ publicacao.autor }}</strong>
+                    <p>{{ publicacao.data_publicacao }}</p>
+                </div>
+            </div>
+
+            <p>{{ publicacao.conteudo }}</p>
+
+            <div class="actionBtnPost">
+                <button type="button" class="filesPost like"><img src="{% static 'home/img/heart.svg' %}" alt="Curtir">Curtir</button>
+                <button type="button" class="filesPost comment"><img src="{% static 'home/img/comment.svg' %}" alt="Comentar">Comentar</button>
+                <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
+            </div>
+
+        </li>
+        {% endfor %}
+    </ul>
+</main>
+
+{% endblock %}
