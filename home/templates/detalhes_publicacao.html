@@ -10,81 +10,86 @@
 
 {% block 'conteudo' %}
 
-<header>
-    <img src="{% static 'home/img/logo.svg' %}" alt="Logo rede social">
-</header>
+    <header class="cabecalho">
+        <img class="cabecalho-imagem" src="{% static 'home/img/inicial.svg' %}" alt="Logo da rede social">
+        <nav class="cabecalho-menu">
+            <a class="cabecalho-menu-item" href="#">Home</a>
+            <a class="cabecalho-menu-item" href="#">Configurações</a>
+            <a class="cabecalho-menu-item" href="#">Meu Perfil</a>
+        </nav>
+    </header>
 
-<main class="main">
-    <!--AQUI SERÃO LISTADAS AS PUBLICAÇÕES-->
+    <main class="main">
+        <!--AQUI SERÃO LISTADAS AS PUBLICAÇÕES-->
 
-    <ul class="posts">
-        <li class="post">
-            <div class="infoUserPost">
-                <div class="imgUserPost"></div>
+        <ul class="posts">
+            <li class="post">
+                <div class="infoUserPost">
+                    <div class="imgUserPost"></div>
 
-                <div class="nameAndHour">
-                    <strong>{{ publicacao.autor }}</strong>
-                    <p>{{ publicacao.data_publicacao }}</p>
-                </div>
-            </div>
-
-            <p>{{ publicacao.conteudo }}</p>
-
-            <div class="actionBtnPost">
-                <button type="button" class="filesPost like"><img src="{% static 'home/img/heart.svg' %}" alt="Curtir">Curtir</button>
-                <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
-            </div>
-
-            <!--ADICIONAR COMENTARIO(RESPONDER APUBLICAÇÃO PRINCIPAL)-->
-
-            <div class="newPost">
-                <div class="infoUser">
-                    <div class="imgUser"></div>
-                    <strong>{{request.user}}</strong>
-                </div>
-                <form id="comment-form-{{ publicacao.id }}" method="POST" action="{% url 'adicionar_comentario' publicacao.id %}" class="formPost">{% csrf_token %}
-                    <textarea id="comment-text-{{ publicacao.id }}" name="comment-text" placeholder="Escreva seu comentário aqui"></textarea>
-        
-                    <div class="iconsAndButton">
-                        <div class="icons">
-                            <button class="btnFileForm"><img src="{% static 'home/img/img.svg' %}" alt="Adicionar uma imagem"></button>
-                            <button class="btnFileForm"><img src="{% static 'home/img/gif.svg' %}" alt="Adicionar um gif"></button>
-                            <button class="btnFileForm"><img src="{% static 'home/img/video.svg' %}" alt="Adicionar um video"></button>
-                        </div>
-                        <button type="submit" id="post-button" class="btnSubmitForm">Publicar</button>
+                    <div class="nameAndHour">
+                        <strong>{{ publicacao.autor }}</strong>
+                        <p>{{ publicacao.data_publicacao }}</p>
                     </div>
-                </form>
-            </div>
-
-        </li>
-
-        <!--COMENTARIOS-->
-
-        {% for comentario in comentarios %}
-        <li class="post">
-            <div class="infoUserPost">
-                <div class="imgUserPost"></div>
-
-                <div class="nameAndHour">
-                    <strong>{{ comentario.usuario }}</strong>
-                    <p>{{ comentario.data_comentario }}</p>
                 </div>
-            </div>
 
-            <p>{{ comentario.texto }}</p>
+                <p>{{ publicacao.conteudo }}</p>
 
-            <div class="actionBtnPost">
-                <button type="button" class="filesPost like"><img src="{% static 'home/img/heart.svg' %}" alt="Curtir">Curtir</button>
-                <a class="filesPost comment" href="{% url 'comentarios' publicacao.id %}">
-                    <img src="{% static 'home/img/comment.svg' %}" alt="">
-                    Comentar
-                </a>
-                <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
-            </div>
+                <div class="actionBtnPost">
+                    <button type="button" class="filesPost like"><img src="{% static 'home/img/heart.svg' %}" alt="Curtir">Curtir</button>
+                    <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
+                </div>
 
-        </li>
-        {% endfor %}
-    </ul>
-</main>
+                <!--ADICIONAR COMENTARIO(RESPONDER APUBLICAÇÃO PRINCIPAL)-->
 
-{% endblock %}
+                <div class="newPost">
+                    <div class="infoUser">
+                        <div class="imgUser"></div>
+                        <strong>{{request.user}}</strong>
+                    </div>
+                    <form id="comment-form-{{ publicacao.id }}" method="POST" action="{% url 'adicionar_comentario' publicacao.id %}" class="formPost">{% csrf_token %}
+                        <textarea id="comment-text-{{ publicacao.id }}" name="comment-text" placeholder="Escreva seu comentário aqui"></textarea>
+            
+                        <div class="iconsAndButton">
+                            <div class="icons">
+                                <button class="btnFileForm"><img src="{% static 'home/img/img.svg' %}" alt="Adicionar uma imagem"></button>
+                                <button class="btnFileForm"><img src="{% static 'home/img/gif.svg' %}" alt="Adicionar um gif"></button>
+                                <button class="btnFileForm"><img src="{% static 'home/img/video.svg' %}" alt="Adicionar um video"></button>
+                            </div>
+                            <button type="submit" id="post-button" class="btnSubmitForm">Publicar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </li>
+
+            <!--COMENTARIOS-->
+
+            {% for comentario in comentarios %}
+            <li class="post">
+                <div class="infoUserPost">
+                    <div class="imgUserPost"></div>
+
+                    <div class="nameAndHour">
+                        <strong>{{ comentario.usuario }}</strong>
+                        <p>{{ comentario.data_comentario }}</p>
+                    </div>
+                </div>
+
+                <p>{{ comentario.texto }}</p>
+
+                <div class="actionBtnPost">
+                    <button type="button" class="filesPost like"><img src="{% static 'home/img/heart.svg' %}" alt="Curtir">Curtir</button>
+                    <a class="filesPost comment" href="{% url 'comentarios_do_comentario' comentario.id %}">
+                        <img src="{% static 'home/img/comment.svg' %}" alt="">
+                        Comentar
+                    </a>
+                    <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
+                </div>
+
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    {% endblock %}

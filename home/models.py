@@ -22,3 +22,14 @@ class Comentario(models.Model):
     
     def __str__(self):
         return f'Comentario de {self.usuario.username} em {self.publicacao.data_publicacao}'
+    
+
+class RespostaComentario(models.Model):
+    comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    texto = models.TextField()
+    data_resposta = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'Resposta de {self.usuario.username} em {self.comentario.publicacao.data_publicacao}'
+    

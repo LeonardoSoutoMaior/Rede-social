@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    text-decoration: none;
   }
   
   body{
@@ -24,6 +25,29 @@
     justify-content: center;
   
     box-shadow: 1px 0 3px rgba(0,0,0,0.4);
+  }
+
+  .cabecalho{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 24px;
+  }
+
+  .cabecalho-imagem{
+    height: 60px;
+  }
+
+  .cabecalho-menu{
+    display: flex;
+    gap: 32px;
+  }
+
+  .cabecalho-menu-item{
+    font-weight: 400;
+    font-size: 18px;
+    color: #FFF;
   }
   
   .main{

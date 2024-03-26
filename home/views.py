@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import constants
 from django.contrib import messages
 from django.contrib import auth
-from home.models import Publicacao, Comentario
+from home.models import Publicacao, Comentario, RespostaComentario
 from django.shortcuts import render, get_object_or_404
 
 def home(request):
@@ -43,3 +43,23 @@ def comentarios(request, publicacao_id):
     comentarios = Comentario.objects.filter(publicacao=publicacao)
     return render(request, 'detalhes_publicacao.html', {'publicacao': publicacao,
                                                         'comentarios': comentarios})
+    
+    
+def adicionar_resposta_comentario(request, comentario_id):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            texto_resposta = request.POST.get('texto-resposta')
+            if texto_resposta.strip():
+                comentario = Comentario.objects.get(pk=comentario_id)
+                nova_resposta = RespostaComentario(comentario=comentario, usuario=request.user, texto=texto_resposta, data_resposta=timezone.now())
+                nova_resposta.save()
+        
+        return redirect('comentarios_do_comentario', comentario_id=comentario_id)
+    
+    
+def comentarios_do_comentario(request, comentario_id):
+    comentario_pai = get_object_or_404(Comentario, pk=comentario_id)
+    comentarios_do_comentario = RespostaComentario.objects.filter(comentario=comentario_pai)
+    return render(request, 'detalhes_comentario.html', {'comentario_pai':comentario_pai,
+                                                        'comentarios_do_comentario': comentarios_do_comentario})
+
