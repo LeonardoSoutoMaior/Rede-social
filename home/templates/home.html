@@ -54,7 +54,11 @@
 
             <div class="actionBtnPost">
                 <button type="button" class="filesPost like"><img src="{% static 'home/img/heart.svg' %}" alt="Curtir">Curtir</button>
-                <button type="button" class="filesPost comment"><img src="{% static 'home/img/comment.svg' %}" alt="Comentar">Comentar</button>
+                <a class="filesPost comment" href="{% url 'comentarios' publicacao.id %}">
+                    <img src="{% static 'home/img/comment.svg' %}" alt="">
+                    Comentar
+                </a>
+               
                 <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
             </div>
 
