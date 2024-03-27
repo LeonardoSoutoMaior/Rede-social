@@ -9,3 +9,8 @@ def atualizar_numero_seguidores(sender, instance, created, **kwargs):
         perfil, _ = Perfil.objects.get_or_create(usuario=usuario_seguindo)
         perfil.total_seguidores +=1
         perfil.save()
+        
+        usuario_seguidor = instance.seguidor
+        perfil_seguidor, _ = Perfil.objects.get_or_create(usuario=usuario_seguidor)
+        perfil_seguidor.total_seguindo +=1
+        perfil_seguidor.save()

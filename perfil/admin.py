@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Seguir, Perfil
 
-# Register your models here.
+admin.site.register(Seguir)
+admin.site.register(Perfil)

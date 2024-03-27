@@ -13,6 +13,7 @@ class Seguir(models.Model):
 class Perfil(models.Model):
     usuario = models.OneToOneField(User, related_name='perfil', on_delete=models.CASCADE)
     total_seguidores = models.PositiveIntegerField(default=0)
+    total_seguindo = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return f'Perfil de {self.usuario.username}'
