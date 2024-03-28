@@ -74,6 +74,18 @@
     margin-right: 20px;
 }
 
+button{
+  background: #23a0ff;
+  padding: 7px 20px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+
 .stats {
     font-size: 16px;
 }
