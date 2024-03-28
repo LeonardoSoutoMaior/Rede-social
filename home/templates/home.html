@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+    <script src="{% static 'home/js/curtida.js' %}"></script>
 {% endblock %}
 
 {% block 'conteudo' %}
@@ -64,12 +65,25 @@
                         Comentar
                     </a>
                 
-                    <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
+                    <!-- <form method="POST" action="{% url 'curtir_publicacao' publicacao.id %}">{% csrf_token %}
+                        {% csrf_token %}
+                        <button type="submit">Curtir</button>
+                    </form> -->
+
+                    <button type="button" id="curtir-button-{{ publicacao.id }}" onclick="curtirPublicacao({{ publicacao.id }})">
+                        {% if request.user in publicacao.curtidas.all %}
+                            Descurtir
+                        {% else %}
+                            Curtir
+                        {% endif %}
+                    </button>
+                    <span id="curtidas-publicacao-{{ publicacao.id }}">{{ publicacao.curtidas.count }}</span> curtidas
+                    
                 </div>
 
             </li>
             {% endfor %}
         </ul>
     </main>
-
+    
     {% endblock %}

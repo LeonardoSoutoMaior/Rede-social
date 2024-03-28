@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseNotAllowed, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.messages import constants
 from django.contrib import messages
@@ -41,8 +41,10 @@ def adicionar_comentario(request, publicacao_id): # Esse publicacao_id foi passa
 def comentarios(request, publicacao_id):
     publicacao = get_object_or_404(Publicacao, pk=publicacao_id)
     comentarios = Comentario.objects.filter(publicacao=publicacao)
+    numero_curtidas = publicacao.curtidas.count()
     return render(request, 'detalhes_publicacao.html', {'publicacao': publicacao,
-                                                        'comentarios': comentarios})
+                                                        'comentarios': comentarios,
+                                                        'numero_curtidas': numero_curtidas})
     
     
 def adicionar_resposta_comentario(request, comentario_id):
@@ -63,3 +65,37 @@ def comentarios_do_comentario(request, comentario_id):
     return render(request, 'detalhes_comentario.html', {'comentario_pai':comentario_pai,
                                                         'comentarios_do_comentario': comentarios_do_comentario})
 
+
+# def curtir_publicacao(request, publicacao_id):
+#     if request.method == 'POST':
+#         if request.user.is_authenticated:
+#             publicacao = Publicacao.objects.get(pk=publicacao_id)
+#             if request.user in publicacao.curtidas.all():
+#                 publicacao.curtidas.remove(request.user)
+#                 curtido = False
+#             else:
+#                 publicacao.curtidas.add(request.user)
+#                 curtido = True
+                
+#             publicacao.save()
+            
+#             return JsonResponse({'curtidas': publicacao.curtidas.count(), 'curtido': curtido})
+#     return JsonResponse({})
+
+
+
+def curtir_publicacao(request, publicacao_id):
+    if request.method == 'POST' and request.user.is_authenticated:
+        publicacao = get_object_or_404(Publicacao, pk=publicacao_id)
+        if request.user in publicacao.curtidas.all():
+            publicacao.curtidas.remove(request.user)
+            curtido = False
+        else:
+            publicacao.curtidas.add(request.user)
+            curtido = True
+        publicacao.save()
+        return JsonResponse({'curtidas': publicacao.curtidas.count(), 'curtido': curtido})
+    else:
+        # Se a requisição não for POST ou o usuário não estiver autenticado,
+        # ou se houver um erro ao obter a publicação, retorne uma resposta vazia
+        return JsonResponse({})

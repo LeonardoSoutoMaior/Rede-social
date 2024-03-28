@@ -8,11 +8,11 @@
 {% block 'conteudo' %}
 
     <header class="cabecalho">
-        <img class="cabecalho-imagem" src="inicial.svg" alt="Logo da rede social">
+        <img class="cabecalho-imagem" src="{% static 'perfil/img/inicial.svg' %}" alt="Logo da rede social">
         <nav class="cabecalho-menu">
             <a class="cabecalho-menu-item" href="{% url 'home' %}">Home</a>
             <a class="cabecalho-menu-item" href="#">Configurações</a>
-            <a class="cabecalho-menu-item" href="#">Meu Perfil</a>
+            <a class="cabecalho-menu-item" href="{% url 'renderizar_perfil' %}">Meu Perfil</a>
         </nav>
     </header>
 
@@ -20,25 +20,42 @@
 
         <div class="profile">
             <div class="profile-info">
-                <img src="caminho_para_sua_foto_de_perfil.jpg" alt="Minha Foto de Perfil">
+                <img src="https://avatars.githubusercontent.com/u/128612140?v=4" alt="Minha Foto de Perfil">
                 <div class="stats">
-                    <p><strong>Seguidores:</strong> 1000</p>
-                    <p><strong>Seguindo:</strong> 500</p>
+                    <p><strong>Seguidores:</strong>{{ seguidores }}</p>
+                    <p><strong>Seguindo:</strong>{{ seguindo }}</p>
                     <button>Seguir</button>
                 </div>
             </div>
         </div>
     
-        <div class="publications">
-            <h2>Minhas Publicações</h2>
-            <div class="post">
-                <p>Conteúdo da primeira publicação...</p>
-            </div>
-            <div class="post">
-                <p>Conteúdo da segunda publicação...</p>
-            </div>
-            <!-- Adicione mais publicações conforme necessário -->
-        </div>
+        <ul class="posts">
+            {% for publicacao in publicacoes %}
+            <li class="post">
+                <div class="infoUserPost">
+                    <div class="imgUserPost"></div>
+
+                    <div class="nameAndHour">
+                        <strong>{{ request.user.username }}</strong>
+                        <p>{{ publicacao.data_publicacao }}</p>
+                    </div>
+                </div>
+
+                <p>{{ publicacao.conteudo }}</p>
+
+                <div class="actionBtnPost">
+                    <button type="button" class="filesPost like"><img src="{% static 'perfil/img/heart.svg' %}" alt="Curtir">Curtir</button>
+                    <a class="filesPost comment" href="{% url 'comentarios' publicacao.id %}">
+                        <img src="{% static 'home/img/comment.svg' %}" alt="">
+                        Comentar
+                    </a>
+                
+                    <button type="button" class="filesPost share"><img src="{% static 'home/img/share.svg' %}" alt="Compartilhar">Compartilhar</button>
+                </div>
+
+            </li>
+            {% endfor %}
+        </ul>
 
     </main>
 

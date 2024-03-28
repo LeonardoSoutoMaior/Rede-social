@@ -6,10 +6,11 @@ from django.http import JsonResponse
 
 
 def renderizar_perfil(request):
+    # Recupere as publicações do usuário
     publicacoes = Publicacao.objects.filter(autor=request.user)
-    
+    # Recupere a quantidade de pessoas que o usuário segue
     seguindo = Seguir.objects.filter(seguidor=request.user).count()
-    
+    # Recupere a quantidade de seguidores do usuário
     seguidores = Seguir.objects.filter(seguindo=request.user).count()
     
     return render(request, 'perfil.html', {'publicacoes': publicacoes,
